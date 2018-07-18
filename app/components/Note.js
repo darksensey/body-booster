@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     ScrollView
 } from 'react-native';
-import { Icon } from 'react-native-material-ui';
+
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Note extends React.Component {
@@ -15,15 +15,18 @@ export default class Note extends React.Component {
         super(props);
         this.state = {text: ''};
     }
+
     render() {
         return (
-          <View key={this.props.keyval} onSwipeLeft={this.props.deleteMethod}>
-              <Text style={styles.noteText}>{this.props.val.date}</Text>
-              <Text style={styles.noteDate}>{this.props.val.note}</Text>
-              {/*<TouchableOpacity onPress={this.props.deleteMethod} style={styles.noteDelete}>*/}
-                  {/*<Icon name="person"/>*/}
-              {/*</TouchableOpacity>*/}
-          </View>
+            <GestureRecognizer
+                onSwipe={(direction, state) => this.onSwipe(direction, state)}
+                onSwipeLeft={() => this.props.deleteMethod}
+            >
+                <View key={this.props.keyval}>
+                    <Text style={styles.noteText}>{this.props.val.date}</Text>
+                    <Text style={styles.noteDate}>{this.props.val.note}</Text>
+                </View>
+            </GestureRecognizer>
         );
     }
 

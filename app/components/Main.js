@@ -10,6 +10,7 @@ import {
 
 import Note from './Note';
 import { Toolbar } from 'react-native-material-ui';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -19,9 +20,45 @@ export default class Main extends React.Component {
             noteText: '',
         };
     }
+
+    onSwipeUp(gestureState) {
+        this.setState({myText: 'You swiped up!'});
+    }
+
+    onSwipeDown(gestureState) {
+        this.setState({myText: 'You swiped down!'});
+    }
+
+    onSwipeLeft(gestureState) {
+        alert('swipe');
+    }
+
+    onSwipeRight(gestureState) {
+        this.setState({myText: 'You swiped right!'});
+    }
+
+    onSwipe(gestureName, gestureState) {
+        const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+        this.setState({gestureName: gestureName});
+        switch (gestureName) {
+            case SWIPE_UP:
+                this.setState({backgroundColor: 'red'});
+                break;
+            case SWIPE_DOWN:
+                this.setState({backgroundColor: 'green'});
+                break;
+            case SWIPE_LEFT:
+                this.setState({backgroundColor: 'blue'});
+                break;
+            case SWIPE_RIGHT:
+                this.setState({backgroundColor: 'yellow'});
+                break;
+        }
+    }
+
     render() {
         let notes = this.state.noteArray.map((key, val)=>{
-            return <Note key={key} val={key} keyval={key} deleteMethod={()=> this.deleteNote(key)} />
+            return <Note key={key} val={key} keyval={key} onSwipeLeft={()=> this.deleteNote(key)} />
         });
 
         return (
@@ -42,7 +79,7 @@ export default class Main extends React.Component {
                   onRightElementPress={ (label) => { console.log(label) }}
               />
 
-              <ScrollView>
+              <ScrollView style={styles.scrollView} onSwipeLeft={()=> this.deleteNote(key)}>
                   {notes}
               </ScrollView>
               <View style={styles.bottombar}>
@@ -80,6 +117,11 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    scrollView: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+    },
     bottombar: {
         flex: 1,
         width: '100%',
@@ -90,6 +132,7 @@ const styles = StyleSheet.create({
     },
     bottombarTextInput: {
         height: 36,
+        width: '90%',
         padding: 5,
         margin: 5,
         borderBottomLeftRadius: 25,
