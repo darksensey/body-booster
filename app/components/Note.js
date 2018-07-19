@@ -13,16 +13,15 @@ import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 export default class Note extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''};
     }
 
     render() {
         return (
             <GestureRecognizer
-                onSwipe={(direction, state) => this.onSwipe(direction, state)}
-                onSwipeLeft={() => this.props.deleteMethod}
+                onSwipeLeft={this.props.deleteMethod}
+                style={styles.wrapper}
             >
-                <View key={this.props.keyval}>
+                <View key={this.props.keyval} >
                     <Text style={styles.noteText}>{this.props.val.date}</Text>
                     <Text style={styles.noteDate}>{this.props.val.note}</Text>
                 </View>
@@ -35,17 +34,20 @@ export default class Note extends React.Component {
 const styles = StyleSheet.create({
     wrapper: {
         padding: 5,
-        height: 40,
+        height: 50,
         width: '100%',
-        backgroundColor: '#FDF686',
         flex: 1,
+        shadowOffset:{  width: 10,  height: 10,  },
+        shadowColor: 'black',
+        shadowOpacity: 1.0,
     },
     noteText: {
-        color: '#0c0c0c'
+        color: '#0c0c0c',
+        fontSize: 15
     },
     noteDate: {
         color: '#4c4c4c',
-        fontSize: 10
+        fontSize: 13,
     },
     deleteMethod: {},
     noteDelete: {}

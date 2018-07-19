@@ -9,56 +9,23 @@ import {
 } from 'react-native';
 
 import Note from './Note';
+import Footer from './Fotter';
 import { Toolbar } from 'react-native-material-ui';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class Main extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            noteArray: [{'date': 'test 2', 'note': 'test Note'}],
+            noteArray: [{'date': 'test 2', 'note': 'test Note'}, {'date': 'test 3', 'note': 'test Note 3'}],
             noteText: '',
+            active: ''
         };
     }
 
-    onSwipeUp(gestureState) {
-        this.setState({myText: 'You swiped up!'});
-    }
-
-    onSwipeDown(gestureState) {
-        this.setState({myText: 'You swiped down!'});
-    }
-
-    onSwipeLeft(gestureState) {
-        alert('swipe');
-    }
-
-    onSwipeRight(gestureState) {
-        this.setState({myText: 'You swiped right!'});
-    }
-
-    onSwipe(gestureName, gestureState) {
-        const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
-        this.setState({gestureName: gestureName});
-        switch (gestureName) {
-            case SWIPE_UP:
-                this.setState({backgroundColor: 'red'});
-                break;
-            case SWIPE_DOWN:
-                this.setState({backgroundColor: 'green'});
-                break;
-            case SWIPE_LEFT:
-                this.setState({backgroundColor: 'blue'});
-                break;
-            case SWIPE_RIGHT:
-                this.setState({backgroundColor: 'yellow'});
-                break;
-        }
-    }
-
     render() {
-        let notes = this.state.noteArray.map((key, val)=>{
-            return <Note key={key} val={key} keyval={key} onSwipeLeft={()=> this.deleteNote(key)} />
+        let notes = this.state.noteArray.map((key, index)=>{
+            return <Note key={index} val={key} keyval={key} deleteMethod={()=> this.deleteNote(index)} />
         });
 
         return (
@@ -79,7 +46,7 @@ export default class Main extends React.Component {
                   onRightElementPress={ (label) => { console.log(label) }}
               />
 
-              <ScrollView style={styles.scrollView} onSwipeLeft={()=> this.deleteNote(key)}>
+              <ScrollView style={styles.scrollView}>
                   {notes}
               </ScrollView>
               <View style={styles.bottombar}>
@@ -92,11 +59,14 @@ export default class Main extends React.Component {
                       value={this.state.noteText}
                   />
               </View>
-              <TouchableOpacity onPress={ this.addNote.bind(this) }
-                                style={ styles.addBtn }><Text style={styles.testAddBtn}>Add</Text></TouchableOpacity>
+              <TouchableOpacity onPress={ this.addNote.bind(this) } style={ styles.addBtn }>
+                  <Text style={styles.testAddBtn}>Add</Text>
+              </TouchableOpacity>
+              <Footer active={this.state.active} changeTab={(tab) => {this.setState({active: tab})}}/>
           </View>
         );
     }
+
     addNote() {
         if (this.state.noteText) {
             let d = new Date();
@@ -105,8 +75,9 @@ export default class Main extends React.Component {
             this.setState({noteText: ''});
         }
     }
-    deleteNote(key) {
-        alert('delete');
+    deleteNote(index) {
+        this.state.noteArray.splice(index, 1);
+        this.setState({noteArray: this.state.noteArray});
     }
 }
 
