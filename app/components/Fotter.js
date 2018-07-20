@@ -9,15 +9,18 @@ import {
 } from 'react-native';
 
 import { BottomNavigation } from 'react-native-material-ui';
+import {MODES} from "../../constants/index";
 
 export default class Footer extends React.Component {
     constructor(props) {
         super(props);
+
+        console.log("props", this.props);
     }
 
     render() {
         return (
-            <BottomNavigation  active={this.props.active} hidden={false} >
+            <BottomNavigation  mode={MODES.SCHEDULE} hidden={false} >
                 <BottomNavigation.Action
                     key="schedule"
                     icon="schedule"

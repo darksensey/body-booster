@@ -1,0 +1,5 @@
+export const MODELS = {
+    SCHEDULE: 'SCHEDULE',
+    TRAININGS: 'TRAININGS',
+    EXERCISES: 'EXERCISES',
+};
