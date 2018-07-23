@@ -20,24 +20,25 @@ export default class Footer extends React.Component {
 
     render() {
         return (
-            <BottomNavigation  mode={MODES.SCHEDULE} hidden={false} >
+            <BottomNavigation  active={ this.props.active } hidden={false} >
                 <BottomNavigation.Action
-                    key="schedule"
+                    key="SCHEDULE"
                     icon="schedule"
                     label="schedule"
-                    onPress={this.props.changeTab}
+                    onPress={() => this.setState( {active: MODES.SCHEDULE}) }
                 />
                 <BottomNavigation.Action
-                    key="work"
+                    key="TRAININGS"
                     icon="work"
                     label="Trainings"
-                    // onPress={() => this.setState({ active: 'people' })}
+                    onPress={() => this.setState( {active: MODES.TRAININGS}) }
                 />
                 <BottomNavigation.Action
-                    key="tasks"
+                    key="EXERCISES"
                     icon="today"
                     label="Exercises"
-                    // onPress={() => this.setState({ active: 'bookmark-border' })}
+                    onPress={() => this.setState( {active: MODES.EXERCISES}) }
+
                 />
                 <BottomNavigation.Action
                     key="settings"

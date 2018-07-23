@@ -5,7 +5,7 @@ import {createStore} from 'redux';
 import reducers from './reducers';
 
 import { COLOR, ThemeContext, getTheme } from 'react-native-material-ui';
-import {MODELS} from './constants/index';
+import {MODES} from './constants/index';
 
 const uiTheme = {
     palette: {
@@ -19,8 +19,9 @@ const uiTheme = {
 };
 
 const initialState = {
-    mode: MODELS.SCHEDULE
+    mode: MODES.SCHEDULE
 };
+
 const store = createStore(reducers, initialState);
 
 export default class App extends React.Component {
@@ -31,7 +32,6 @@ export default class App extends React.Component {
                     <Provider store={store}>
                         <Main />
                     </Provider>
-
                 </ThemeContext.Provider>
         );
     }

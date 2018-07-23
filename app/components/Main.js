@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 
 import Note from './Note';
-import Footer from './Fotter';
+import FooterContainer from './../../containers/FooterContainer';
+
 import { Toolbar } from 'react-native-material-ui';
 
 export default class Main extends React.Component {
@@ -19,7 +20,7 @@ export default class Main extends React.Component {
         this.state = {
             noteArray: [{'date': 'test 2', 'note': 'test Note'}, {'date': 'test 3', 'note': 'test Note 3'}],
             noteText: '',
-            active: ''
+            mode: ''
         };
     }
 
@@ -62,7 +63,7 @@ export default class Main extends React.Component {
               <TouchableOpacity onPress={ this.addNote.bind(this) } style={ styles.addBtn }>
                   <Text style={styles.testAddBtn}>Add</Text>
               </TouchableOpacity>
-              <Footer active={this.state.active} changeTab={(tab) => {this.setState({active: tab})}}/>
+              <FooterContainer active={this.state.active} changeTab={(tab) => {this.setState({active: tab})}}/>
           </View>
         );
     }
