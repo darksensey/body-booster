@@ -61,7 +61,7 @@ export default class Main extends React.Component {
                   />
               </View>
               <TouchableOpacity onPress={ this.addNote.bind(this) } style={ styles.addBtn }>
-                  <Text style={styles.testAddBtn}>Add</Text>
+                  <Text style={styles.testAddBtn}>+</Text>
               </TouchableOpacity>
               <FooterContainer active={this.state.active} changeTab={(tab) => {this.setState({active: tab})}}/>
           </View>
@@ -97,32 +97,32 @@ const styles = StyleSheet.create({
     bottombar: {
         flex: 1,
         width: '100%',
-        height: 42,
+        height: 38,
         position: 'absolute',
-        bottom: 0,
-        backgroundColor: '#1D1D1D'
+        bottom: 57,
+        backgroundColor: '#757575'
     },
     bottombarTextInput: {
-        height: 36,
-        width: '90%',
+        height: 31,
+        width: '87%',
         padding: 5,
-        margin: 5,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
+        margin: 3,
+        borderBottomLeftRadius: 18,
+        borderBottomRightRadius: 18,
+        borderTopLeftRadius: 18,
+        borderTopRightRadius: 18,
         backgroundColor: '#fff'
     },
     addBtn: {
         position: 'absolute',
-        bottom: 50,
-        width: 60,
-        height: 60,
-        right: 20,
+        bottom: 58,
+        width: 35,
+        height: 35,
+        right: 10,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#C00020",
+        backgroundColor: "#13c03d",
     },
     testAddBtn: {
         color: '#fff'
