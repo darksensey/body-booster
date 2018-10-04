@@ -19,7 +19,7 @@ const uiTheme = {
 };
 
 const initialState = {
-    mode: MODES.SCHEDULE
+    mode: MODES.SCHEDULE,
 };
 
 const store = createStore(reducers, initialState);

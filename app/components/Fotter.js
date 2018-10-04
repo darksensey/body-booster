@@ -11,46 +11,76 @@ import {
 import { BottomNavigation } from 'react-native-material-ui';
 import {MODES} from "../../constants/index";
 
-export default class Footer extends React.Component {
-    constructor(props) {
-        super(props);
+const AppFooter = ({mode = MODES.SCHEDULE, setMode = () => {}}) => (
+    <BottomNavigation  active = {mode} hidden={false} >
+        <BottomNavigation.Action
+            key="SCHEDULE"
+            icon="schedule"
+            label="schedule"
+            onPress={() => setMode(MODES.SCHEDULE)}
+        />
+        <BottomNavigation.Action
+            key="TRAININGS"
+            icon="work"
+            label="Trainings"
+            onPress={() => setMode(MODES.TRAININGS) }
+        />
+        <BottomNavigation.Action
+            key="EXERCISES"
+            icon="today"
+            label="Exercises"
+            onPress={() => setMode(MODES.EXERCISES) }
+        />
+        <BottomNavigation.Action
+            key="settings"
+            icon="settings"
+            label="Settings"
 
-        console.log("props", this.props);
-    }
-
-    render() {
-        return (
-            <BottomNavigation  active={ this.props.active } hidden={false} >
-                <BottomNavigation.Action
-                    key="SCHEDULE"
-                    icon="schedule"
-                    label="schedule"
-                    onPress={() => this.setState( {active: MODES.SCHEDULE}) }
-                />
-                <BottomNavigation.Action
-                    key="TRAININGS"
-                    icon="work"
-                    label="Trainings"
-                    onPress={() => this.setState( {active: MODES.TRAININGS}) }
-                />
-                <BottomNavigation.Action
-                    key="EXERCISES"
-                    icon="today"
-                    label="Exercises"
-                    onPress={() => this.setState( {active: MODES.EXERCISES}) }
-
-                />
-                <BottomNavigation.Action
-                    key="settings"
-                    icon="settings"
-                    label="Settings"
-                    // onPress={() => this.setState({ active: 'settings' })}
-                />
-            </BottomNavigation>
-        );
-    }
-
-}
+        />
+    </BottomNavigation>
+);
+export default AppFooter;
+//
+// export default class Footer extends React.Component {
+//     constructor(props) {
+//         super(props);
+//
+//         console.log("props", this.props);
+//     }
+//
+//     render() {
+//         return (
+//             <BottomNavigation  active={ this.props.active } hidden={false} >
+//                 <BottomNavigation.Action
+//                     key="SCHEDULE"
+//                     icon="schedule"
+//                     label="schedule"
+//                     onPress={() => this.setState( {active: MODES.SCHEDULE}) }
+//                 />
+//                 <BottomNavigation.Action
+//                     key="TRAININGS"
+//                     icon="work"
+//                     label="Trainings"
+//                     onPress={() => this.setState( {active: MODES.TRAININGS}) }
+//                 />
+//                 <BottomNavigation.Action
+//                     key="EXERCISES"
+//                     icon="today"
+//                     label="Exercises"
+//                     onPress={() => this.setState( {active: MODES.EXERCISES}) }
+//
+//                 />
+//                 <BottomNavigation.Action
+//                     key="settings"
+//                     icon="settings"
+//                     label="Settings"
+//
+//                 />
+//             </BottomNavigation>
+//         );
+//     }
+//
+// }
 
 const styles = StyleSheet.create({
     wrapper: {

@@ -1,8 +1,24 @@
 import React from 'react';
 import Footer from '../app/components/Fotter';
-import {MODES} from "../constants/index";
+import {connect} from "react-redux";
+import {setMode} from '../actions';
 
-const FooterContainer = () => (
-    <Footer active={MODES.SCHEDULE} />
+const mapStateToProps = (state) => ({
+    mode: state.mode
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    setMode(mode) {
+        console.log('dispatch', mode);
+        dispatch(setMode(mode));
+    }
+});
+
+const FooterContainer = ({mode, setMode}) => (
+    <Footer mode={mode} setMode={setMode} />
 );
-export default FooterContainer;
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FooterContainer);
