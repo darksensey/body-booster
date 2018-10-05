@@ -7,6 +7,12 @@ import reducers from './reducers';
 import { COLOR, ThemeContext, getTheme } from 'react-native-material-ui';
 import {MODES} from './constants/index';
 
+import { createStackNavigator } from 'react-navigation';
+
+const AppStackNavigator = new createStackNavigator({
+    HomeScreen: {screen: Main},
+});
+
 const uiTheme = {
     palette: {
         primaryColor: COLOR.green500,
@@ -30,9 +36,10 @@ export default class App extends React.Component {
         return (
                 <ThemeContext.Provider value={getTheme(uiTheme)}>
                     <Provider store={store}>
-                        <Main />
+                        <AppStackNavigator />
                     </Provider>
                 </ThemeContext.Provider>
         );
     }
 }
+

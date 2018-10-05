@@ -1,15 +1,11 @@
 import React from 'react';
 import {
     StyleSheet,
-    Text,
-    View,
-    TextInput,
-    TouchableOpacity,
-    ScrollView
 } from 'react-native';
 
 import { BottomNavigation } from 'react-native-material-ui';
 import {MODES} from "../../constants/index";
+import PropTypes from 'prop-types';
 
 const AppFooter = ({mode = MODES.SCHEDULE, setMode = () => {}}) => (
     <BottomNavigation  active = {mode} hidden={false} >
@@ -35,52 +31,15 @@ const AppFooter = ({mode = MODES.SCHEDULE, setMode = () => {}}) => (
             key="settings"
             icon="settings"
             label="Settings"
-
         />
     </BottomNavigation>
 );
 export default AppFooter;
-//
-// export default class Footer extends React.Component {
-//     constructor(props) {
-//         super(props);
-//
-//         console.log("props", this.props);
-//     }
-//
-//     render() {
-//         return (
-//             <BottomNavigation  active={ this.props.active } hidden={false} >
-//                 <BottomNavigation.Action
-//                     key="SCHEDULE"
-//                     icon="schedule"
-//                     label="schedule"
-//                     onPress={() => this.setState( {active: MODES.SCHEDULE}) }
-//                 />
-//                 <BottomNavigation.Action
-//                     key="TRAININGS"
-//                     icon="work"
-//                     label="Trainings"
-//                     onPress={() => this.setState( {active: MODES.TRAININGS}) }
-//                 />
-//                 <BottomNavigation.Action
-//                     key="EXERCISES"
-//                     icon="today"
-//                     label="Exercises"
-//                     onPress={() => this.setState( {active: MODES.EXERCISES}) }
-//
-//                 />
-//                 <BottomNavigation.Action
-//                     key="settings"
-//                     icon="settings"
-//                     label="Settings"
-//
-//                 />
-//             </BottomNavigation>
-//         );
-//     }
-//
-// }
+
+AppFooter.propTypes = {
+    mode: PropTypes.string,
+    setMode: PropTypes.func
+};
 
 const styles = StyleSheet.create({
     wrapper: {
